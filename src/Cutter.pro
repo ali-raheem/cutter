@@ -424,7 +424,8 @@ SOURCES += \
     common/IOModesController.cpp \
     common/SettingsUpgrade.cpp \
     dialogs/LayoutManager.cpp \
-    common/CutterLayout.cpp
+    common/CutterLayout.cpp \
+    common/ResourcePaths.cpp
 
 GRAPHVIZ_SOURCES = \
     widgets/GraphvizLayout.cpp
@@ -574,7 +575,8 @@ HEADERS  += \
     common/IOModesController.h \
     common/SettingsUpgrade.h \
     dialogs/LayoutManager.h \
-    common/CutterLayout.h
+    common/CutterLayout.h \
+    common/ResourcePaths.h
 
 GRAPHVIZ_HEADERS = widgets/GraphGridLayout.h
 
