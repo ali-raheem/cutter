@@ -247,6 +247,8 @@ if (CUTTER_APPIMAGE_BUILD)
     target_compile_definitions(Cutter PRIVATE APPIMAGE)
 endif()
 
+include(Translations)
+
 # Install files
 install(TARGETS Cutter
         EXPORT CutterTargets
