@@ -50,7 +50,7 @@ matrix:
          - libxkbcommon-x11-dev
          - ninja-build/xenial-backports
 
-  - name: Linux Ubuntu 16.04
+  - name: Linux Ubuntu 16.04 # test that Cutter can be built on an old distro using system libraries
     os: linux
     env: BUILD_SYSTEM=cmake_nodep PATH="/usr/bin:$PATH"
     dist: xenial
@@ -62,6 +62,7 @@ matrix:
          - qt5-default
          - libqt5svg5-dev
          - qttools5-dev
+         - qttools5-dev-tools
          - cmake
     before_install:
       - pyenv install 3.5.2
@@ -260,8 +261,8 @@ after_success:
       wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/6/linuxdeployqt-6-x86_64.AppImage" &&
       chmod a+x linuxdeployqt*.AppImage &&
       rm -fv "$TRAVIS_BUILD_DIR/cutter-deps/qt/plugins/imageformats/libqjp2.so" &&
-      ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -executable=./appdir/usr/bin/python3 -unsupported-allow-new-glibc -bundle-non-qt-libs -no-strip -exclude-libs=libnss3.so,libnssutil3.so,libqjp2.so -ignore-glob=usr/lib/python3.6/**/* -verbose=2 &&
-      ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -executable=./appdir/usr/bin/python3 -unsupported-allow-new-glibc -appimage -no-strip -exclude-libs=libnss3.so,libnssutil3.so,libqjp2.so -ignore-glob=usr/lib/python3.6/**/* -verbose=2 &&
+      ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -executable=./appdir/usr/bin/python3 -bundle-non-qt-libs -no-strip -exclude-libs=libnss3.so,libnssutil3.so,libqjp2.so -ignore-glob=usr/lib/python3.6/**/* -verbose=2 &&
+      ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -executable=./appdir/usr/bin/python3 -appimage -no-strip -exclude-libs=libnss3.so,libnssutil3.so,libqjp2.so -ignore-glob=usr/lib/python3.6/**/* -verbose=2 &&
       find ./appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq &&
       export APPIMAGE_FILE="Cutter-v$CUTTER_VERSION-x64.Linux.AppImage" &&
       mv Cutter-*-x86_64.AppImage "$APPIMAGE_FILE" &&
