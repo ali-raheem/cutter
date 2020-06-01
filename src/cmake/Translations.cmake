@@ -17,12 +17,12 @@ set(TS_FILES
 set_source_files_properties(${TS_FILES} PROPERTIES OUTPUT_LOCATION ${CMAKE_CURRENT_BINARY_DIR}/translations)
 find_package(Qt5LinguistTools REQUIRED)
 qt5_add_translation(qmFiles ${TS_FILES})
-add_custom_target(translations ALL DEPENDS ${qmFiles})
+add_custom_target(translations ALL DEPENDS ${qmFiles} SOURCES ${TS_FILES})
 
 install(FILES
     ${qmFiles}
     # For Linux it might be more correct to use ${MAKE_INSTALL_LOCALEDIR}, but that
     # uses share/locale_name/software_name layout instead of share/software_name/locale_files.
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${CUTTER_DIR_NAME}/translations
+    DESTINATION ${CUTTER_INSTALL_DATADIR}/translations
 )
 
